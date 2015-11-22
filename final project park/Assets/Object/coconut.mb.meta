@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 580c3283735b6432ab09828f3e3f374c
-timeCreated: 1448216640
+guid: 754f4d98abb28401bb320965ef9a31a4
+timeCreated: 1448222036
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pPyramid1
+    4300000: modelCoconut
     9500000: //RootNode
   materials:
     importMaterials: 1

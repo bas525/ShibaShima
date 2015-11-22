@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 583f6e55c7d634b5d9dc18f9c8acdd16
-timeCreated: 1448217448
+guid: f7cbb26516ada40999bf95faa53ac9a5
+timeCreated: 1448223021
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: modelRock03
+    4300000: modelWelcome
     9500000: //RootNode
   materials:
     importMaterials: 1
