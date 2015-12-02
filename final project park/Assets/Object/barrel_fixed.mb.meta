@@ -1,22 +1,17 @@
 fileFormatVersion: 2
-guid: 48e0718d1b5644724b45fb16c18df289
-timeCreated: 1449027846
+guid: 777fe8a3de4444baf9771ce0a5513fcc
+timeCreated: 1449092256
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: modelBarrel
-    100004: pCone1
+    100002: pasted__modelBarrel
     400000: //RootNode
-    400002: modelBarrel
-    400004: pCone1
-    2300000: modelBarrel
-    2300002: pCone1
-    3300000: modelBarrel
-    3300002: pCone1
-    4300000: modelBarrel
-    4300002: pCone1
+    400002: pasted__modelBarrel
+    2300000: pasted__modelBarrel
+    3300000: pasted__modelBarrel
+    4300000: pasted__modelBarrel
     9500000: //RootNode
   materials:
     importMaterials: 1
