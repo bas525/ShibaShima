@@ -36,7 +36,7 @@ public class Player_2 : MonoBehaviour {
 	{
 		if (col.collider.tag == "Ground")
 		{
-			//rb.drag = 1;
+			rb.drag = 1;
 			grounded = true;
 		}
 	}
@@ -45,7 +45,7 @@ public class Player_2 : MonoBehaviour {
 	{
 		if (col.collider.tag == "Ground")
 		{
-			//rb.drag = 0;
+			rb.drag = 0;
 			grounded = false;
 		}
 	}
