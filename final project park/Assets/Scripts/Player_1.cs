@@ -8,8 +8,12 @@ public class Player_1 : MonoBehaviour {
 	[Header("Movement")]
 	public float moveSpeed;
 	public float reverseSpeed;
+	public float slideX;
+	public float slideY;
+	public float slideZ;
 	public float jumpStrength;
 	public float rotateSpeed;
+	public float setDrag;
 	public bool grounded = false;
 	
 	[Header("Health")]
@@ -22,6 +26,9 @@ public class Player_1 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		slideX = rb.velocity.x;
+		slideY = rb.velocity.y;
+		slideZ = rb.velocity.z;
 		if (Input.GetKey (KeyCode.A))
 			{
 				transform.RotateAround(transform.position, transform.up, -5*rotateSpeed);
@@ -36,8 +43,9 @@ public class Player_1 : MonoBehaviour {
 	{
 		if (col.collider.tag == "Ground")
 		{
-			//rb.drag = 1;
+			rb.drag = setDrag;
 			grounded = true;
+			
 		}
 	}
 
@@ -45,7 +53,7 @@ public class Player_1 : MonoBehaviour {
 	{
 		if (col.collider.tag == "Ground")
 		{
-			//rb.drag = 0;
+			rb.drag = 0;
 			grounded = false;
 		}
 	}
