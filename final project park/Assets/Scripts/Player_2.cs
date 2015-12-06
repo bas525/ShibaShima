@@ -19,6 +19,13 @@ public class Player_2 : MonoBehaviour {
 	[Header("Health")]
 	public int health;
 	
+	[Header("PowerUps")]
+	public bool SpeedBoost;
+	public int speedTime;
+	public bool haveBark;
+	public bool haveDash;
+	public bool stunned;
+	
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();

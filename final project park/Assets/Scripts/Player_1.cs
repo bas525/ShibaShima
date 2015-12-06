@@ -7,6 +7,7 @@ public class Player_1 : MonoBehaviour {
 	
 	[Header("Movement")]
 	public float moveSpeed;
+	public float airSpeed;
 	public float reverseSpeed;
 	public float slideX;
 	public float slideY;
@@ -18,6 +19,13 @@ public class Player_1 : MonoBehaviour {
 	
 	[Header("Health")]
 	public int health;
+	
+	[Header("PowerUps")]
+	public bool SpeedBoost;
+	public int speedTime;
+	public bool haveBark;
+	public bool haveDash;
+	public bool stunned;
 	
 	// Use this for initialization
 	void Start () {
@@ -70,15 +78,22 @@ public class Player_1 : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKey(KeyCode.W) && grounded)
+		if (Input.GetKey(KeyCode.W))
 		{
-			rb.AddForce(transform.forward * moveSpeed);
+			if (grounded) {
+				rb.AddForce(transform.forward * moveSpeed);
+			}
+			else {
+				rb.AddForce(transform.forward * moveSpeed * airSpeed);
+			
 		}
 		
-		if (Input.GetKey(KeyCode.S) && grounded)
+		if (Input.GetKey(KeyCode.S))
 		{
 			//moves the dog backwards
-			rb.AddForce(-transform.forward * reverseSpeed);
+			if (grounded) {
+				rb.AddForce(-transform.forward * reverseSpeed);
+			}
 		}
 	}
 }
