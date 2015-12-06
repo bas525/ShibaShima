@@ -4,20 +4,15 @@ using System.Collections;
 public class Player_2 : MonoBehaviour {
 
 	private Rigidbody rb;
-
+	
 	[Header("Movement")]
 	public float moveSpeed;
+	public float airSpeed;
 	public float reverseSpeed;
-	public float slideX;
-    public float slideY;
-    public float slideZ;
 	public float jumpStrength;
 	public float rotateSpeed;
 	public float setDrag;
-	public bool grounded = false;
-
-	[Header("Health")]
-	public int health;
+	private bool grounded = false;
 	
 	[Header("PowerUps")]
 	public bool SpeedBoost;
@@ -33,9 +28,6 @@ public class Player_2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		slideX = rb.velocity.x;
-        slideY = rb.velocity.y;
-        slideZ = rb.velocity.z;
 		if (Input.GetKey (KeyCode.LeftArrow))
 			{
 				transform.RotateAround(transform.position, transform.up, -5*rotateSpeed);
@@ -52,6 +44,7 @@ public class Player_2 : MonoBehaviour {
 		{
 			rb.drag = setDrag;
 			grounded = true;
+			
 		}
 	}
 
@@ -76,15 +69,25 @@ public class Player_2 : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKey(KeyCode.UpArrow) && grounded)
+		if (Input.GetKey(KeyCode.UpArrow))
 		{
-			rb.AddForce(transform.forward * moveSpeed);
+			if (grounded) {
+				rb.AddForce(transform.forward * moveSpeed);
+			}
+			else {
+				rb.AddForce(transform.forward * moveSpeed * airSpeed);
+			}
 		}
 		
-		if (Input.GetKey(KeyCode.DownArrow) && grounded)
+		if (Input.GetKey(KeyCode.DownArrow))
 		{
 			//moves the dog backwards
-			rb.AddForce(-transform.forward * reverseSpeed);
+			if (grounded) {
+				rb.AddForce(-transform.forward * reverseSpeed);
+			}
+			else {
+				rb.AddForce(-transform.forward * reverseSpeed * airSpeed);
+			}
 		}
 	}
 }
