@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameFlow : MonoBehaviour {
+public class Indicator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,6 +10,6 @@ public class GameFlow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		transform.RotateAround(transform.position, transform.up, 5);
 	}
 }
