@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MovementScript : MonoBehaviour
 {
-	public float speed = 10.0f;
+	public float speed = 3.0f;
 	CharacterController cc;
 	
 	void Awake()
