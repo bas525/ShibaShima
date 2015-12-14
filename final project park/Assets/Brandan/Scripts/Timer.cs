@@ -36,22 +36,26 @@ public class Timer : MonoBehaviour {
 	public float badMushroomRespawn;
 	private float nextBadMushroom = 5;
 	public int badMushroomTotal;
-	/*
+
 	[Header("Spawn Good Mushrooms")]
 	public GameObject[] GoodMushrooms;
 	public float goodMushroomRespawn;
 	private float nextGoodMushroom;
-	
+	public int goodMushroomTotal;
+
+
 	[Header("Spawn Dog Bone")]
 	public GameObject[] DogBones;
 	public float dogBoneRespawn;
 	private float nextDogBone;
+	public int dogBoneTotal;
 	
 	[Header("Spawn Chocolate")]
 	public GameObject[] Chocolates;
 	public float chocolateRespawn;
 	private float nextChocolate;
-	*/
+	public int chocolateTotal;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -109,42 +113,35 @@ public class Timer : MonoBehaviour {
 			}
 			BadMushrooms[rand].SetActive(true);
 			badMushroomTotal += 1;
-			nextBadMushroom = Time.time + badMushroomRespawn;/*
-			while(BadMushrooms[rand].activeSelf) {
-				rand = Random.Range(0, BadMushrooms.Lenght);
-			}
-			BadMushrooms[rand].SetActive(true);
-			while(BadMushrooms[rand].activeSelf) {
-				rand = Random.Range(0, BadMushrooms.Lenght);
-			}
-			BadMushrooms[rand].SetActive(true);
 			nextBadMushroom = Time.time + badMushroomRespawn;
-			*/
 		}
-		/*
-		if(Time.time > nextGoodMushroom) {
+
+		if(Time.time > nextGoodMushroom && goodMushroomTotal < GoodMushrooms.Length) {
 			int rand = Random.Range(0, GoodMushrooms.Length);
 			while(GoodMushrooms[rand].activeSelf) {
 				rand = Random.Range(0, GoodMushrooms.Length);
 			}
 			GoodMushrooms[rand].SetActive(true);
+			goodMushroomTotal += 1;
 			nextGoodMushroom = Time.time + goodMushroomRespawn;
 		}
-		if(Time.time > nextDogBone) {
-			int rand = Random.Range(0, DogBones.Length);
+		if(Time.time > nextDogBone && dogBoneTotal < DogBones.Length) {
+			int rand = Random.Range(0, DogBones.Length );
 			while(DogBones[rand].activeSelf) {
 				rand = Random.Range(0, DogBones.Length);
 			}
 			DogBones[rand].SetActive(true);
+			dogBoneTotal += 1;
 			nextDogBone = Time.time + dogBoneRespawn;
 		}
-		if(Time.time > nextChocolate) {
+		if(Time.time > nextChocolate && chocolateTotal < Chocolates.Length) {
 			int rand = Random.Range(0, Chocolates.Length);
 			while(Chocolates[rand].activeSelf) {
 				rand = Random.Range(0, Chocolates.Length);
 			}
 			Chocolates[rand].SetActive(true);
-			nextDogBone = Time.time + nextChocolate;
-		}*/
+			chocolateTotal += 1;
+			nextChocolate = Time.time + nextChocolate;
+		}
 	}
 }
