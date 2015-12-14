@@ -124,18 +124,30 @@ public class Player_2 : MonoBehaviour {
 		}
 		if(col.tag == "SpeedPower" && !SpeedBoost)
 		{
-			SpeedBoost = true;
-			speedEnd = speedTime + Time.time;
+			if(SpeedDown) {
+				SpeedDown = false;
+				SparkDown.SetActive(false);
+			}
+			else{
+				SpeedBoost = true;
+				speedEnd = speedTime + Time.time;
+				SparkUp.SetActive(true);
+			}
 			col.gameObject.SetActive(false);
-			SparkUp.SetActive(true);
 			
 		}
 		if (col.tag == "SpeedDown" && !SpeedDown) 
 		{
-			SpeedDown = true;
-			speedEnd =  Time.time +5;
+			if(SpeedBoost) {
+				SpeedBoost = false;
+				SparkUp.SetActive(false);
+			}
+			else {
+				SpeedDown = true;
+				speedEnd =  Time.time +5;
+				SparkDown.SetActive(true);
+			}
 			col.gameObject.SetActive(false);
-			SparkDown.SetActive(true);
 		}
 	}
 	

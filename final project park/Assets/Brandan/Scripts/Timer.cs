@@ -24,13 +24,34 @@ public class Timer : MonoBehaviour {
 	public GameObject Win1;
 	public GameObject Win2;
 	private bool GameOver = false;
-	
+	/*
 	[Header("Power Control")]
 	public GameObject speed;
 	public GameObject bark;
 	public float respawnS;
 	public float respawnB;
+	*/
+	[Header("Spawn Bad Mushrooms")]
+	public GameObject[] BadMushrooms;
+	public float badMushroomRespawn;
+	private float nextBadMushroom = 5;
+	public int badMushroomTotal;
+	/*
+	[Header("Spawn Good Mushrooms")]
+	public GameObject[] GoodMushrooms;
+	public float goodMushroomRespawn;
+	private float nextGoodMushroom;
 	
+	[Header("Spawn Dog Bone")]
+	public GameObject[] DogBones;
+	public float dogBoneRespawn;
+	private float nextDogBone;
+	
+	[Header("Spawn Chocolate")]
+	public GameObject[] Chocolates;
+	public float chocolateRespawn;
+	private float nextChocolate;
+	*/
 	// Use this for initialization
 	void Start () {
 	
@@ -65,7 +86,7 @@ public class Timer : MonoBehaviour {
 			textBuffer = "0" + textBuffer;
 		}
 		GetComponent<TextMesh>().text = textBuffer;
-		
+		/*
 		if(!speed.activeSelf && respawnS == 0) {
 			respawnS = Time.time + 20;
 		}
@@ -80,5 +101,50 @@ public class Timer : MonoBehaviour {
 			bark.SetActive(true);
 			respawnB = 0;
 		}
+		*/
+		if(Time.time > nextBadMushroom && badMushroomTotal < BadMushrooms.Length) {
+			int rand = Random.Range(0, BadMushrooms.Length);
+			while(BadMushrooms[rand].activeSelf) {
+				rand = Random.Range(0, BadMushrooms.Length);
+			}
+			BadMushrooms[rand].SetActive(true);
+			badMushroomTotal += 1;
+			nextBadMushroom = Time.time + badMushroomRespawn;/*
+			while(BadMushrooms[rand].activeSelf) {
+				rand = Random.Range(0, BadMushrooms.Lenght);
+			}
+			BadMushrooms[rand].SetActive(true);
+			while(BadMushrooms[rand].activeSelf) {
+				rand = Random.Range(0, BadMushrooms.Lenght);
+			}
+			BadMushrooms[rand].SetActive(true);
+			nextBadMushroom = Time.time + badMushroomRespawn;
+			*/
+		}
+		/*
+		if(Time.time > nextGoodMushroom) {
+			int rand = Random.Range(0, GoodMushrooms.Length);
+			while(GoodMushrooms[rand].activeSelf) {
+				rand = Random.Range(0, GoodMushrooms.Length);
+			}
+			GoodMushrooms[rand].SetActive(true);
+			nextGoodMushroom = Time.time + goodMushroomRespawn;
+		}
+		if(Time.time > nextDogBone) {
+			int rand = Random.Range(0, DogBones.Length);
+			while(DogBones[rand].activeSelf) {
+				rand = Random.Range(0, DogBones.Length);
+			}
+			DogBones[rand].SetActive(true);
+			nextDogBone = Time.time + dogBoneRespawn;
+		}
+		if(Time.time > nextChocolate) {
+			int rand = Random.Range(0, Chocolates.Length);
+			while(Chocolates[rand].activeSelf) {
+				rand = Random.Range(0, Chocolates.Length);
+			}
+			Chocolates[rand].SetActive(true);
+			nextDogBone = Time.time + nextChocolate;
+		}*/
 	}
 }
