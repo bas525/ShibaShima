@@ -16,6 +16,9 @@ public class Butt : MonoBehaviour {
 	public GameObject Ind;
 	public GameObject opInd;
 	
+	[Header("Sound Effects")]
+	public AudioSource sfx;
+	public AudioClip alert;
 	// Use this for initialization
 	void Start () {
 	
@@ -36,6 +39,7 @@ public class Butt : MonoBehaviour {
 			opInd.SetActive(false);
 			opponent.sniffed = false;
 			dog.transform.position = new Vector3(StartPosX, StartPosY, StartPosZ);
+			sfx.PlayOneShot(alert);
 		}
 
 	}

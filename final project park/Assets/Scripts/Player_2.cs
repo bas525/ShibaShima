@@ -7,7 +7,7 @@ public class Player_2 : MonoBehaviour {
 	
 	[Header("Movement")]
 	public float Speed;
-	public float moveSpeed;
+	private float moveSpeed;
 	public float airSpeed;
 	public float reverseSpeed;
 	public float jumpStrength;
@@ -18,19 +18,35 @@ public class Player_2 : MonoBehaviour {
 	
 	[Header("PowerUps")]
 	private bool SpeedBoost = false;
+	private bool SpeedDown = false;
 	public float speedTime;
 	public float speedEnd;
 	private bool haveBark = false;
+	public GameObject barkIndicator;
 	private float barkEnd;
 	private bool usedBark;
+	private bool haveFart = false;
+	public GameObject fartIndicator;
+	private float fartEnd;
+	private bool usedFart;
 	public GameObject bark;
+	public GameObject fart;
 	private bool stunned;
 	private float freezeEnd;
+	public GameObject SparkUp;
+	public GameObject SparkDown;
 	
 	[Header("Sniffed")]
 	public Butt butt;
 	public bool sniffed;
 	
+	[Header("Sound Effects")]
+    public AudioSource sfx;
+    public AudioClip Barking;
+    public AudioClip Farting;
+	public AudioClip SpeedingSound;
+	public AudioClip SlowingSound;
+	public AudioClip GetPower;
 	
 	// Use this for initialization
 	void Start () {
@@ -43,14 +59,26 @@ public class Player_2 : MonoBehaviour {
 			usedBark = false;
 			bark.SetActive(false);
 		}
-		if(Time.time > speedEnd && SpeedBoost) {
-			SpeedBoost = false;
+		if(Time.time > fartEnd && usedFart) {
+			usedFart = false;
+			fart.SetActive(false);
+		
 		}
 		if(Time.time > freezeEnd && stunned) {
 			stunned = false;
 			frozen = 1;
 		}
-	
+
+		if (Time.time > speedEnd && SpeedBoost) {
+			SpeedBoost = false;
+			SparkUp.SetActive(false);
+		}
+
+		if (Time.time > speedEnd && SpeedDown) {
+			SpeedDown = false;
+			SparkDown.SetActive(false);
+		}
+		 
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
 			transform.RotateAround(transform.position, transform.up, -5*rotateSpeed*frozen);
@@ -59,40 +87,85 @@ public class Player_2 : MonoBehaviour {
 		{
 			transform.RotateAround(transform.position, transform.up, 5*rotateSpeed*frozen);
 		}
-		if (Input.GetKey (KeyCode.L))
+		if (Input.GetKey (KeyCode.Comma))
 		{
 			if(haveBark) {
 				bark.SetActive(true);
 				barkEnd = Time.time + 1;
 				usedBark = true;
 				haveBark = false;
+				barkIndicator.SetActive(false);
+				sfx.PlayOneShot(Barking);
+			}
+			if(haveFart) {
+				fart.SetActive(true);
+				fartEnd = Time.time + 1;
+				usedFart = true;
+				haveFart = false;
+				fartIndicator.SetActive(false);
+				sfx.PlayOneShot(Farting);
 			}
 		
 		}
 		sniffed = butt.sniffed;
 		if(sniffed) moveSpeed = Speed * 1.05f;
 		else moveSpeed = Speed;
-		if(SpeedBoost) moveSpeed = moveSpeed*1.1f;
+		
+		if(SpeedBoost) moveSpeed = moveSpeed*2.0f;
+
+		if (SpeedDown) moveSpeed = moveSpeed * 0.5f;
 	}
 	
 	void OnTriggerEnter(Collider col)
 	{
-		Debug.Log("HFUOWEFVWEUIO");
 		if(col.tag == "Bark")
 		{
 			frozen = 0;
 			stunned = true;
 			freezeEnd = Time.time + 2;
 		}
-		if(col.tag == "BarkPower" && !haveBark)
+		if(col.tag == "BarkPower" && !haveBark && !haveFart)
 		{
+			sfx.PlayOneShot(GetPower);
 			haveBark = true;
+			barkIndicator.SetActive(true);
+			col.gameObject.SetActive(false);
+		}
+		if(col.tag == "FartPower" && !haveBark && !haveFart)
+		{
+			sfx.PlayOneShot(GetPower);
+			haveFart = true;
+			fartIndicator.SetActive(true);
 			col.gameObject.SetActive(false);
 		}
 		if(col.tag == "SpeedPower" && !SpeedBoost)
 		{
-			SpeedBoost = true;
-			speedEnd = speedTime + Time.time;
+			sfx.PlayOneShot(SpeedingSound);
+			if(SpeedDown) {
+				SpeedDown = false;
+				SparkDown.SetActive(false);
+			}
+			else{
+				SpeedBoost = true;
+				speedEnd = speedTime + Time.time;
+				SparkUp.SetActive(true);
+			}
+			col.gameObject.SetActive(false);
+			
+
+		}
+		if (col.tag == "SpeedDown" && !SpeedDown) 
+		{
+			sfx.PlayOneShot(SlowingSound);
+			if(SpeedBoost) {
+				SpeedBoost = false;
+				SparkUp.SetActive(false);
+			}
+			else {
+				SpeedDown = true;
+	         	speedEnd =  Time.time +5;
+				SparkDown.SetActive(true);
+			}
 			col.gameObject.SetActive(false);
 		}
 	}
@@ -120,7 +193,7 @@ public class Player_2 : MonoBehaviour {
 	void FixedUpdate()
 	{
 
-		if (Input.GetKeyDown(KeyCode.M))
+		if (Input.GetKeyDown(KeyCode.Period))
 		{
 			if (grounded)
 			{
