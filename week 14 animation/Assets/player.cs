@@ -3,22 +3,22 @@ using System.Collections;
 
 public class player : MonoBehaviour {
 
-	Animator anim;
+	public Animator anim;
 
 
 	// Use this for initialization
 	void Start () {
 	
-		anim = GetComponent<>
+		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input GetKey(KeyCode.M))
+		if (Input.GetKey(KeyCode.M))
 		{
 			anim.SetBool("isWalking",true);
 		} else {
-			anim.SetBool("isWalking", false)
+			anim.SetBool("isWalking", false);
 		}
 	
 	}

@@ -15,7 +15,6 @@ public class Player_1 : MonoBehaviour {
 	public float setDrag;
 	private float frozen = 1;
 	private bool grounded = false;
-	Animator anim;
 	
 	[Header("PowerUps")]
 	private bool SpeedBoost = false;
@@ -52,8 +51,6 @@ public class Player_1 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
-		
-		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -65,7 +62,6 @@ public class Player_1 : MonoBehaviour {
 		if(Time.time > fartEnd && usedFart) {
 			usedFart = false;
 			fart.SetActive(false);
-		
 		}
 		if(Time.time > freezeEnd && stunned) {
 			stunned = false;
@@ -200,7 +196,6 @@ public class Player_1 : MonoBehaviour {
 		{
 			if (grounded)
 			{
-				anim.SetBool("RunAnimation", true);
 				rb.AddForce(transform.up * jumpStrength * frozen, ForceMode.VelocityChange);
 			}
 		}
